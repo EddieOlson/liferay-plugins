@@ -95,37 +95,37 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] {  };
 
-		_methodName14 = "deletePersistedModel";
+		_methodName13 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes14 = new String[] {
+		_methodParameterTypes13 = new String[] {  };
+
+		_methodName15 = "deletePersistedModel";
+
+		_methodParameterTypes15 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName15 = "getPersistedModel";
+		_methodName16 = "getPersistedModel";
 
-		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
 
-		_methodName16 = "getPushNotificationsDevices";
+		_methodName17 = "getPushNotificationsDevices";
 
-		_methodParameterTypes16 = new String[] { "int", "int" };
+		_methodParameterTypes17 = new String[] { "int", "int" };
 
-		_methodName17 = "getPushNotificationsDevicesCount";
+		_methodName18 = "getPushNotificationsDevicesCount";
 
-		_methodParameterTypes17 = new String[] {  };
+		_methodParameterTypes18 = new String[] {  };
 
-		_methodName18 = "updatePushNotificationsDevice";
+		_methodName19 = "updatePushNotificationsDevice";
 
-		_methodParameterTypes18 = new String[] {
+		_methodParameterTypes19 = new String[] {
 				"com.liferay.pushnotifications.model.PushNotificationsDevice"
 			};
 
-		_methodName43 = "getBeanIdentifier";
+		_methodName44 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes43 = new String[] {  };
-
-		_methodName44 = "setBeanIdentifier";
-
-		_methodParameterTypes44 = new String[] { "java.lang.String" };
+		_methodParameterTypes44 = new String[] {  };
 
 		_methodName49 = "addPushNotificationsDevice";
 
@@ -158,6 +158,19 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 		_methodParameterTypes54 = new String[] {
 				"java.lang.String", "java.util.List",
 				"com.liferay.portal.kernel.json.JSONObject"
+			};
+
+		_methodName55 = "sendPushNotification";
+
+		_methodParameterTypes55 = new String[] {
+				"java.lang.String", "java.util.List",
+				"com.liferay.portal.kernel.json.JSONObject", "java.util.Map"
+			};
+
+		_methodName56 = "updateToken";
+
+		_methodParameterTypes56 = new String[] {
+				"java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -234,42 +247,40 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 			return PushNotificationsDeviceLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName14.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return PushNotificationsDeviceLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+		if (_methodName13.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
+			return PushNotificationsDeviceLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return PushNotificationsDeviceLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return PushNotificationsDeviceLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return PushNotificationsDeviceLocalServiceUtil.getPushNotificationsDevices(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return PushNotificationsDeviceLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return PushNotificationsDeviceLocalServiceUtil.getPushNotificationsDevicesCount();
+			return PushNotificationsDeviceLocalServiceUtil.getPushNotificationsDevices(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return PushNotificationsDeviceLocalServiceUtil.updatePushNotificationsDevice((com.liferay.pushnotifications.model.PushNotificationsDevice)arguments[0]);
+			return PushNotificationsDeviceLocalServiceUtil.getPushNotificationsDevicesCount();
 		}
 
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return PushNotificationsDeviceLocalServiceUtil.getBeanIdentifier();
+		if (_methodName19.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return PushNotificationsDeviceLocalServiceUtil.updatePushNotificationsDevice((com.liferay.pushnotifications.model.PushNotificationsDevice)arguments[0]);
 		}
 
 		if (_methodName44.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
-			PushNotificationsDeviceLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return PushNotificationsDeviceLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName49.equals(name) &&
@@ -314,6 +325,24 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			PushNotificationsDeviceLocalServiceUtil.sendPushNotification((java.lang.String)arguments[0],
+				(java.util.List<java.lang.String>)arguments[1],
+				(com.liferay.portal.kernel.json.JSONObject)arguments[2],
+				(java.util.Map<java.lang.String, java.lang.Object>)arguments[3]);
+
+			return null;
+		}
+
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			PushNotificationsDeviceLocalServiceUtil.updateToken((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -343,8 +372,8 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
@@ -353,8 +382,8 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 	private String[] _methodParameterTypes17;
 	private String _methodName18;
 	private String[] _methodParameterTypes18;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 	private String _methodName44;
 	private String[] _methodParameterTypes44;
 	private String _methodName49;
@@ -369,4 +398,8 @@ public class PushNotificationsDeviceLocalServiceClpInvoker {
 	private String[] _methodParameterTypes53;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }

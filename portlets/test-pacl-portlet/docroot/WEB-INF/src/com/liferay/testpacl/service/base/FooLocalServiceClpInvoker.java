@@ -91,35 +91,35 @@ public class FooLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] {  };
 
-		_methodName14 = "deletePersistedModel";
+		_methodName13 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes14 = new String[] {
+		_methodParameterTypes13 = new String[] {  };
+
+		_methodName15 = "deletePersistedModel";
+
+		_methodParameterTypes15 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName15 = "getPersistedModel";
+		_methodName16 = "getPersistedModel";
 
-		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
 
-		_methodName16 = "getFoos";
+		_methodName17 = "getFoos";
 
-		_methodParameterTypes16 = new String[] { "int", "int" };
+		_methodParameterTypes17 = new String[] { "int", "int" };
 
-		_methodName17 = "getFoosCount";
+		_methodName18 = "getFoosCount";
 
-		_methodParameterTypes17 = new String[] {  };
+		_methodParameterTypes18 = new String[] {  };
 
-		_methodName18 = "updateFoo";
+		_methodName19 = "updateFoo";
 
-		_methodParameterTypes18 = new String[] { "com.liferay.testpacl.model.Foo" };
+		_methodParameterTypes19 = new String[] { "com.liferay.testpacl.model.Foo" };
 
-		_methodName57 = "getBeanIdentifier";
+		_methodName58 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes57 = new String[] {  };
-
-		_methodName58 = "setBeanIdentifier";
-
-		_methodParameterTypes58 = new String[] { "java.lang.String" };
+		_methodParameterTypes58 = new String[] {  };
 
 		_methodName63 = "getCompanyPersistence_FindByPrimaryKey";
 
@@ -263,42 +263,40 @@ public class FooLocalServiceClpInvoker {
 			return FooLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName14.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return FooLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+		if (_methodName13.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
+			return FooLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return FooLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return FooLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return FooLocalServiceUtil.getFoos(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return FooLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return FooLocalServiceUtil.getFoosCount();
+			return FooLocalServiceUtil.getFoos(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return FooLocalServiceUtil.updateFoo((com.liferay.testpacl.model.Foo)arguments[0]);
+			return FooLocalServiceUtil.getFoosCount();
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
-			return FooLocalServiceUtil.getBeanIdentifier();
+		if (_methodName19.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return FooLocalServiceUtil.updateFoo((com.liferay.testpacl.model.Foo)arguments[0]);
 		}
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			FooLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return FooLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName63.equals(name) &&
@@ -417,8 +415,8 @@ public class FooLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
@@ -427,8 +425,8 @@ public class FooLocalServiceClpInvoker {
 	private String[] _methodParameterTypes17;
 	private String _methodName18;
 	private String[] _methodParameterTypes18;
-	private String _methodName57;
-	private String[] _methodParameterTypes57;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
 	private String _methodName63;

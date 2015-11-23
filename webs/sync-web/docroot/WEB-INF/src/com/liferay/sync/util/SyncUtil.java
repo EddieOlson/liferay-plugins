@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -289,8 +290,17 @@ public class SyncUtil {
 	}
 
 	public static boolean isSyncEnabled(Group group) {
+		if (group.isUser() &&
+			!PrefsPropsUtil.getBoolean(
+				group.getCompanyId(),
+				PortletPropsKeys.SYNC_ALLOW_USER_PERSONAL_SITES,
+				PortletPropsValues.SYNC_ALLOW_USER_PERSONAL_SITES)) {
+
+			return false;
+		}
+
 		return GetterUtil.getBoolean(
-			group.getTypeSettingsProperty("syncEnabled"), true);
+			group.getTypeSettingsProperty("syncEnabled"), !group.isCompany());
 	}
 
 	public static void patchFile(
@@ -418,27 +428,13 @@ public class SyncUtil {
 		SyncDLObject syncDLObject = new SyncDLObjectImpl();
 
 		syncDLObject.setCompanyId(dlFileVersion.getCompanyId());
-
-		long userId = 0;
-		String userName = StringPool.BLANK;
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if (permissionChecker != null) {
-			User user = permissionChecker.getUser();
-
-			userId = user.getUserId();
-			userName = user.getFullName();
-		}
-
-		syncDLObject.setUserId(userId);
-		syncDLObject.setUserName(userName);
-
+		syncDLObject.setUserId(dlFileVersion.getUserId());
+		syncDLObject.setUserName(dlFileVersion.getUserName());
 		syncDLObject.setCreateDate(dlFileVersion.getCreateDate());
 		syncDLObject.setModifiedDate(dlFileVersion.getModifiedDate());
 		syncDLObject.setRepositoryId(dlFileVersion.getRepositoryId());
 		syncDLObject.setParentFolderId(dlFileVersion.getFolderId());
+		syncDLObject.setTreePath(dlFileVersion.getTreePath());
 		syncDLObject.setName(dlFileVersion.getTitle());
 		syncDLObject.setExtension(dlFileVersion.getExtension());
 		syncDLObject.setMimeType(dlFileVersion.getMimeType());
@@ -493,6 +489,7 @@ public class SyncUtil {
 		syncDLObject.setModifiedDate(dlFolder.getModifiedDate());
 		syncDLObject.setRepositoryId(dlFolder.getRepositoryId());
 		syncDLObject.setParentFolderId(dlFolder.getParentFolderId());
+		syncDLObject.setTreePath(dlFolder.getTreePath());
 		syncDLObject.setName(dlFolder.getName());
 		syncDLObject.setExtension(StringPool.BLANK);
 		syncDLObject.setMimeType(StringPool.BLANK);

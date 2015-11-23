@@ -99,47 +99,47 @@ public class WSRPConsumerLocalServiceClpInvoker {
 
 		_methodParameterTypes13 = new String[] {  };
 
-		_methodName15 = "getExportActionableDynamicQuery";
+		_methodName14 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes15 = new String[] {
+		_methodParameterTypes14 = new String[] {  };
+
+		_methodName16 = "getExportActionableDynamicQuery";
+
+		_methodParameterTypes16 = new String[] {
 				"com.liferay.portlet.exportimport.lar.PortletDataContext"
 			};
 
-		_methodName16 = "deletePersistedModel";
+		_methodName17 = "deletePersistedModel";
 
-		_methodParameterTypes16 = new String[] {
+		_methodParameterTypes17 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName17 = "getPersistedModel";
+		_methodName18 = "getPersistedModel";
 
-		_methodParameterTypes17 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes18 = new String[] { "java.io.Serializable" };
 
-		_methodName18 = "getWSRPConsumerByUuidAndCompanyId";
+		_methodName19 = "getWSRPConsumerByUuidAndCompanyId";
 
-		_methodParameterTypes18 = new String[] { "java.lang.String", "long" };
+		_methodParameterTypes19 = new String[] { "java.lang.String", "long" };
 
-		_methodName19 = "getWSRPConsumers";
+		_methodName20 = "getWSRPConsumers";
 
-		_methodParameterTypes19 = new String[] { "int", "int" };
+		_methodParameterTypes20 = new String[] { "int", "int" };
 
-		_methodName20 = "getWSRPConsumersCount";
+		_methodName21 = "getWSRPConsumersCount";
 
-		_methodParameterTypes20 = new String[] {  };
+		_methodParameterTypes21 = new String[] {  };
 
-		_methodName21 = "updateWSRPConsumer";
+		_methodName22 = "updateWSRPConsumer";
 
-		_methodParameterTypes21 = new String[] {
+		_methodParameterTypes22 = new String[] {
 				"com.liferay.wsrp.model.WSRPConsumer"
 			};
 
-		_methodName52 = "getBeanIdentifier";
+		_methodName53 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes52 = new String[] {  };
-
-		_methodName53 = "setBeanIdentifier";
-
-		_methodParameterTypes53 = new String[] { "java.lang.String" };
+		_methodParameterTypes53 = new String[] {  };
 
 		_methodName58 = "addWSRPConsumer";
 
@@ -279,53 +279,51 @@ public class WSRPConsumerLocalServiceClpInvoker {
 			return WSRPConsumerLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName15.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.getExportActionableDynamicQuery((com.liferay.portlet.exportimport.lar.PortletDataContext)arguments[0]);
+		if (_methodName14.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
+			return WSRPConsumerLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+			return WSRPConsumerLocalServiceUtil.getExportActionableDynamicQuery((com.liferay.portlet.exportimport.lar.PortletDataContext)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return WSRPConsumerLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.getWSRPConsumerByUuidAndCompanyId((java.lang.String)arguments[0],
-				((Long)arguments[1]).longValue());
+			return WSRPConsumerLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName19.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.getWSRPConsumers(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return WSRPConsumerLocalServiceUtil.getWSRPConsumerByUuidAndCompanyId((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName20.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes20, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.getWSRPConsumersCount();
+			return WSRPConsumerLocalServiceUtil.getWSRPConsumers(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName21.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes21, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.updateWSRPConsumer((com.liferay.wsrp.model.WSRPConsumer)arguments[0]);
+			return WSRPConsumerLocalServiceUtil.getWSRPConsumersCount();
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return WSRPConsumerLocalServiceUtil.getBeanIdentifier();
+		if (_methodName22.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes22, parameterTypes)) {
+			return WSRPConsumerLocalServiceUtil.updateWSRPConsumer((com.liferay.wsrp.model.WSRPConsumer)arguments[0]);
 		}
 
 		if (_methodName53.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			WSRPConsumerLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return WSRPConsumerLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName58.equals(name) &&
@@ -432,8 +430,8 @@ public class WSRPConsumerLocalServiceClpInvoker {
 	private String[] _methodParameterTypes12;
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
-	private String _methodName15;
-	private String[] _methodParameterTypes15;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
 	private String _methodName16;
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
@@ -446,8 +444,8 @@ public class WSRPConsumerLocalServiceClpInvoker {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 	private String _methodName53;
 	private String[] _methodParameterTypes53;
 	private String _methodName58;

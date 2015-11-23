@@ -95,37 +95,37 @@ public class FavoriteSiteLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] {  };
 
-		_methodName14 = "deletePersistedModel";
+		_methodName13 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes14 = new String[] {
+		_methodParameterTypes13 = new String[] {  };
+
+		_methodName15 = "deletePersistedModel";
+
+		_methodParameterTypes15 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName15 = "getPersistedModel";
+		_methodName16 = "getPersistedModel";
 
-		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
 
-		_methodName16 = "getFavoriteSites";
+		_methodName17 = "getFavoriteSites";
 
-		_methodParameterTypes16 = new String[] { "int", "int" };
+		_methodParameterTypes17 = new String[] { "int", "int" };
 
-		_methodName17 = "getFavoriteSitesCount";
+		_methodName18 = "getFavoriteSitesCount";
 
-		_methodParameterTypes17 = new String[] {  };
+		_methodParameterTypes18 = new String[] {  };
 
-		_methodName18 = "updateFavoriteSite";
+		_methodName19 = "updateFavoriteSite";
 
-		_methodParameterTypes18 = new String[] {
+		_methodParameterTypes19 = new String[] {
 				"com.liferay.so.model.FavoriteSite"
 			};
 
-		_methodName65 = "getBeanIdentifier";
+		_methodName66 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes65 = new String[] {  };
-
-		_methodName66 = "setBeanIdentifier";
-
-		_methodParameterTypes66 = new String[] { "java.lang.String" };
+		_methodParameterTypes66 = new String[] {  };
 
 		_methodName71 = "addFavoriteSite";
 
@@ -239,42 +239,40 @@ public class FavoriteSiteLocalServiceClpInvoker {
 			return FavoriteSiteLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName14.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return FavoriteSiteLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+		if (_methodName13.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
+			return FavoriteSiteLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return FavoriteSiteLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return FavoriteSiteLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return FavoriteSiteLocalServiceUtil.getFavoriteSites(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return FavoriteSiteLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return FavoriteSiteLocalServiceUtil.getFavoriteSitesCount();
+			return FavoriteSiteLocalServiceUtil.getFavoriteSites(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return FavoriteSiteLocalServiceUtil.updateFavoriteSite((com.liferay.so.model.FavoriteSite)arguments[0]);
+			return FavoriteSiteLocalServiceUtil.getFavoriteSitesCount();
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
-			return FavoriteSiteLocalServiceUtil.getBeanIdentifier();
+		if (_methodName19.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return FavoriteSiteLocalServiceUtil.updateFavoriteSite((com.liferay.so.model.FavoriteSite)arguments[0]);
 		}
 
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			FavoriteSiteLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return FavoriteSiteLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName71.equals(name) &&
@@ -362,8 +360,8 @@ public class FavoriteSiteLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
@@ -372,8 +370,8 @@ public class FavoriteSiteLocalServiceClpInvoker {
 	private String[] _methodParameterTypes17;
 	private String _methodName18;
 	private String[] _methodParameterTypes18;
-	private String _methodName65;
-	private String[] _methodParameterTypes65;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
 	private String _methodName71;

@@ -99,58 +99,58 @@ public class KBCommentLocalServiceClpInvoker {
 
 		_methodParameterTypes13 = new String[] {  };
 
-		_methodName15 = "getExportActionableDynamicQuery";
+		_methodName14 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes15 = new String[] {
+		_methodParameterTypes14 = new String[] {  };
+
+		_methodName16 = "getExportActionableDynamicQuery";
+
+		_methodParameterTypes16 = new String[] {
 				"com.liferay.portlet.exportimport.lar.PortletDataContext"
 			};
 
-		_methodName16 = "deletePersistedModel";
+		_methodName17 = "deletePersistedModel";
 
-		_methodParameterTypes16 = new String[] {
+		_methodParameterTypes17 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName17 = "getPersistedModel";
+		_methodName18 = "getPersistedModel";
 
-		_methodParameterTypes17 = new String[] { "java.io.Serializable" };
-
-		_methodName18 = "getKBCommentsByUuidAndCompanyId";
-
-		_methodParameterTypes18 = new String[] { "java.lang.String", "long" };
+		_methodParameterTypes18 = new String[] { "java.io.Serializable" };
 
 		_methodName19 = "getKBCommentsByUuidAndCompanyId";
 
-		_methodParameterTypes19 = new String[] {
+		_methodParameterTypes19 = new String[] { "java.lang.String", "long" };
+
+		_methodName20 = "getKBCommentsByUuidAndCompanyId";
+
+		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "long", "int", "int",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 
-		_methodName20 = "getKBCommentByUuidAndGroupId";
+		_methodName21 = "getKBCommentByUuidAndGroupId";
 
-		_methodParameterTypes20 = new String[] { "java.lang.String", "long" };
+		_methodParameterTypes21 = new String[] { "java.lang.String", "long" };
 
-		_methodName21 = "getKBComments";
+		_methodName22 = "getKBComments";
 
-		_methodParameterTypes21 = new String[] { "int", "int" };
+		_methodParameterTypes22 = new String[] { "int", "int" };
 
-		_methodName22 = "getKBCommentsCount";
+		_methodName23 = "getKBCommentsCount";
 
-		_methodParameterTypes22 = new String[] {  };
+		_methodParameterTypes23 = new String[] {  };
 
-		_methodName23 = "updateKBComment";
+		_methodName24 = "updateKBComment";
 
-		_methodParameterTypes23 = new String[] {
+		_methodParameterTypes24 = new String[] {
 				"com.liferay.knowledgebase.model.KBComment"
 			};
 
-		_methodName86 = "getBeanIdentifier";
+		_methodName87 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes86 = new String[] {  };
-
-		_methodName87 = "setBeanIdentifier";
-
-		_methodParameterTypes87 = new String[] { "java.lang.String" };
+		_methodParameterTypes87 = new String[] {  };
 
 		_methodName92 = "addKBComment";
 
@@ -343,29 +343,34 @@ public class KBCommentLocalServiceClpInvoker {
 			return KBCommentLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName15.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return KBCommentLocalServiceUtil.getExportActionableDynamicQuery((com.liferay.portlet.exportimport.lar.PortletDataContext)arguments[0]);
+		if (_methodName14.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
+			return KBCommentLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return KBCommentLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+			return KBCommentLocalServiceUtil.getExportActionableDynamicQuery((com.liferay.portlet.exportimport.lar.PortletDataContext)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return KBCommentLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return KBCommentLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return KBCommentLocalServiceUtil.getKBCommentsByUuidAndCompanyId((java.lang.String)arguments[0],
-				((Long)arguments[1]).longValue());
+			return KBCommentLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName19.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return KBCommentLocalServiceUtil.getKBCommentsByUuidAndCompanyId((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName20.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes20, parameterTypes)) {
 			return KBCommentLocalServiceUtil.getKBCommentsByUuidAndCompanyId((java.lang.String)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Integer)arguments[2]).intValue(),
@@ -373,38 +378,31 @@ public class KBCommentLocalServiceClpInvoker {
 				(com.liferay.portal.kernel.util.OrderByComparator<com.liferay.knowledgebase.model.KBComment>)arguments[4]);
 		}
 
-		if (_methodName20.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes20, parameterTypes)) {
+		if (_methodName21.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes21, parameterTypes)) {
 			return KBCommentLocalServiceUtil.getKBCommentByUuidAndGroupId((java.lang.String)arguments[0],
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName21.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes21, parameterTypes)) {
+		if (_methodName22.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes22, parameterTypes)) {
 			return KBCommentLocalServiceUtil.getKBComments(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName22.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes22, parameterTypes)) {
+		if (_methodName23.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes23, parameterTypes)) {
 			return KBCommentLocalServiceUtil.getKBCommentsCount();
 		}
 
-		if (_methodName23.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes23, parameterTypes)) {
+		if (_methodName24.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
 			return KBCommentLocalServiceUtil.updateKBComment((com.liferay.knowledgebase.model.KBComment)arguments[0]);
-		}
-
-		if (_methodName86.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
-			return KBCommentLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName87.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
-			KBCommentLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return KBCommentLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName92.equals(name) &&
@@ -585,8 +583,8 @@ public class KBCommentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes12;
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
-	private String _methodName15;
-	private String[] _methodParameterTypes15;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
 	private String _methodName16;
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
@@ -603,8 +601,8 @@ public class KBCommentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes22;
 	private String _methodName23;
 	private String[] _methodParameterTypes23;
-	private String _methodName86;
-	private String[] _methodParameterTypes86;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 	private String _methodName87;
 	private String[] _methodParameterTypes87;
 	private String _methodName92;
