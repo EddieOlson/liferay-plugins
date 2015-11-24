@@ -95,37 +95,37 @@ public class TasksEntryLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] {  };
 
-		_methodName14 = "deletePersistedModel";
+		_methodName13 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes14 = new String[] {
+		_methodParameterTypes13 = new String[] {  };
+
+		_methodName15 = "deletePersistedModel";
+
+		_methodParameterTypes15 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName15 = "getPersistedModel";
+		_methodName16 = "getPersistedModel";
 
-		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
 
-		_methodName16 = "getTasksEntries";
+		_methodName17 = "getTasksEntries";
 
-		_methodParameterTypes16 = new String[] { "int", "int" };
+		_methodParameterTypes17 = new String[] { "int", "int" };
 
-		_methodName17 = "getTasksEntriesCount";
+		_methodName18 = "getTasksEntriesCount";
 
-		_methodParameterTypes17 = new String[] {  };
+		_methodParameterTypes18 = new String[] {  };
 
-		_methodName18 = "updateTasksEntry";
+		_methodName19 = "updateTasksEntry";
 
-		_methodParameterTypes18 = new String[] {
+		_methodParameterTypes19 = new String[] {
 				"com.liferay.tasks.model.TasksEntry"
 			};
 
-		_methodName45 = "getBeanIdentifier";
+		_methodName46 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes45 = new String[] {  };
-
-		_methodName46 = "setBeanIdentifier";
-
-		_methodParameterTypes46 = new String[] { "java.lang.String" };
+		_methodParameterTypes46 = new String[] {  };
 
 		_methodName51 = "addTasksEntry";
 
@@ -314,42 +314,40 @@ public class TasksEntryLocalServiceClpInvoker {
 			return TasksEntryLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName14.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return TasksEntryLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+		if (_methodName13.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
+			return TasksEntryLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return TasksEntryLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return TasksEntryLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return TasksEntryLocalServiceUtil.getTasksEntries(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return TasksEntryLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return TasksEntryLocalServiceUtil.getTasksEntriesCount();
+			return TasksEntryLocalServiceUtil.getTasksEntries(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return TasksEntryLocalServiceUtil.updateTasksEntry((com.liferay.tasks.model.TasksEntry)arguments[0]);
+			return TasksEntryLocalServiceUtil.getTasksEntriesCount();
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			return TasksEntryLocalServiceUtil.getBeanIdentifier();
+		if (_methodName19.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return TasksEntryLocalServiceUtil.updateTasksEntry((com.liferay.tasks.model.TasksEntry)arguments[0]);
 		}
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			TasksEntryLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return TasksEntryLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName51.equals(name) &&
@@ -556,8 +554,8 @@ public class TasksEntryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
@@ -566,8 +564,8 @@ public class TasksEntryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes17;
 	private String _methodName18;
 	private String[] _methodParameterTypes18;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
 	private String _methodName51;

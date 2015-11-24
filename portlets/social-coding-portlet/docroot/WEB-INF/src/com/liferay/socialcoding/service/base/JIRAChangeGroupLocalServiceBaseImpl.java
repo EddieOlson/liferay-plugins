@@ -17,7 +17,6 @@ package com.liferay.socialcoding.service.base;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.bean.BeanReference;
-import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -26,9 +25,11 @@ import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -73,7 +74,7 @@ import javax.sql.DataSource;
 @ProviderType
 public abstract class JIRAChangeGroupLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements JIRAChangeGroupLocalService,
-		IdentifiableBean {
+		IdentifiableOSGiService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -238,19 +239,33 @@ public abstract class JIRAChangeGroupLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAChangeGroupLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JIRAChangeGroup.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JIRAChangeGroup.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("jiraChangeGroupId");
 
 		return actionableDynamicQuery;
 	}
 
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAChangeGroupLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(JIRAChangeGroup.class);
+
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"jiraChangeGroupId");
+
+		return indexableActionableDynamicQuery;
+	}
+
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAChangeGroupLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(JIRAChangeGroup.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(JIRAChangeGroup.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("jiraChangeGroupId");
 	}
@@ -796,23 +811,13 @@ public abstract class JIRAChangeGroupLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the Spring bean ID for this bean.
+	 * Returns the OSGi service identifier.
 	 *
-	 * @return the Spring bean ID for this bean
+	 * @return the OSGi service identifier
 	 */
 	@Override
-	public String getBeanIdentifier() {
-		return _beanIdentifier;
-	}
-
-	/**
-	 * Sets the Spring bean ID for this bean.
-	 *
-	 * @param beanIdentifier the Spring bean ID for this bean
-	 */
-	@Override
-	public void setBeanIdentifier(String beanIdentifier) {
-		_beanIdentifier = beanIdentifier;
+	public String getOSGiServiceIdentifier() {
+		return JIRAChangeGroupLocalService.class.getName();
 	}
 
 	@Override
@@ -874,7 +879,7 @@ public abstract class JIRAChangeGroupLocalServiceBaseImpl
 	protected JIRAActionPersistence jiraActionPersistence;
 	@BeanReference(type = JIRAActionFinder.class)
 	protected JIRAActionFinder jiraActionFinder;
-	@BeanReference(type = JIRAChangeGroupLocalService.class)
+	@BeanReference(type = com.liferay.socialcoding.service.JIRAChangeGroupLocalService.class)
 	protected JIRAChangeGroupLocalService jiraChangeGroupLocalService;
 	@BeanReference(type = JIRAChangeGroupPersistence.class)
 	protected JIRAChangeGroupPersistence jiraChangeGroupPersistence;
@@ -918,7 +923,6 @@ public abstract class JIRAChangeGroupLocalServiceBaseImpl
 	protected com.liferay.portal.service.UserService userService;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	private String _beanIdentifier;
 	private ClassLoader _classLoader;
 	private JIRAChangeGroupLocalServiceClpInvoker _clpInvoker = new JIRAChangeGroupLocalServiceClpInvoker();
 }

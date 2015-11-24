@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.ShardedModel;
 import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -43,7 +44,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
-	StagedGroupedModel {
+	ShardedModel, StagedGroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -222,6 +223,22 @@ public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
 	 * @param bookingNumber the booking number of this sample l a r booking
 	 */
 	public void setBookingNumber(String bookingNumber);
+
+	/**
+	 * Returns the last publish date of this sample l a r booking.
+	 *
+	 * @return the last publish date of this sample l a r booking
+	 */
+	@Override
+	public Date getLastPublishDate();
+
+	/**
+	 * Sets the last publish date of this sample l a r booking.
+	 *
+	 * @param lastPublishDate the last publish date of this sample l a r booking
+	 */
+	@Override
+	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override
 	public boolean isNew();

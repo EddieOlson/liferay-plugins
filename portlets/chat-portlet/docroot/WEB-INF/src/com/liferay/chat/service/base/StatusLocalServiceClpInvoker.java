@@ -91,35 +91,35 @@ public class StatusLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] {  };
 
-		_methodName14 = "deletePersistedModel";
+		_methodName13 = "getIndexableActionableDynamicQuery";
 
-		_methodParameterTypes14 = new String[] {
+		_methodParameterTypes13 = new String[] {  };
+
+		_methodName15 = "deletePersistedModel";
+
+		_methodParameterTypes15 = new String[] {
 				"com.liferay.portal.model.PersistedModel"
 			};
 
-		_methodName15 = "getPersistedModel";
+		_methodName16 = "getPersistedModel";
 
-		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
 
-		_methodName16 = "getStatuses";
+		_methodName17 = "getStatuses";
 
-		_methodParameterTypes16 = new String[] { "int", "int" };
+		_methodParameterTypes17 = new String[] { "int", "int" };
 
-		_methodName17 = "getStatusesCount";
+		_methodName18 = "getStatusesCount";
 
-		_methodParameterTypes17 = new String[] {  };
+		_methodParameterTypes18 = new String[] {  };
 
-		_methodName18 = "updateStatus";
+		_methodName19 = "updateStatus";
 
-		_methodParameterTypes18 = new String[] { "com.liferay.chat.model.Status" };
+		_methodParameterTypes19 = new String[] { "com.liferay.chat.model.Status" };
 
-		_methodName49 = "getBeanIdentifier";
+		_methodName50 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes49 = new String[] {  };
-
-		_methodName50 = "setBeanIdentifier";
-
-		_methodParameterTypes50 = new String[] { "java.lang.String" };
+		_methodParameterTypes50 = new String[] {  };
 
 		_methodName55 = "getAllStatuses";
 
@@ -234,42 +234,40 @@ public class StatusLocalServiceClpInvoker {
 			return StatusLocalServiceUtil.getActionableDynamicQuery();
 		}
 
-		if (_methodName14.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return StatusLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+		if (_methodName13.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
+			return StatusLocalServiceUtil.getIndexableActionableDynamicQuery();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return StatusLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return StatusLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName16.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return StatusLocalServiceUtil.getStatuses(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return StatusLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName17.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
-			return StatusLocalServiceUtil.getStatusesCount();
+			return StatusLocalServiceUtil.getStatuses(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName18.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
-			return StatusLocalServiceUtil.updateStatus((com.liferay.chat.model.Status)arguments[0]);
+			return StatusLocalServiceUtil.getStatusesCount();
 		}
 
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			return StatusLocalServiceUtil.getBeanIdentifier();
+		if (_methodName19.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+			return StatusLocalServiceUtil.updateStatus((com.liferay.chat.model.Status)arguments[0]);
 		}
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			StatusLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-
-			return null;
+			return StatusLocalServiceUtil.getOSGiServiceIdentifier();
 		}
 
 		if (_methodName55.equals(name) &&
@@ -357,8 +355,8 @@ public class StatusLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
@@ -367,8 +365,8 @@ public class StatusLocalServiceClpInvoker {
 	private String[] _methodParameterTypes17;
 	private String _methodName18;
 	private String[] _methodParameterTypes18;
-	private String _methodName49;
-	private String[] _methodParameterTypes49;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
 	private String _methodName55;

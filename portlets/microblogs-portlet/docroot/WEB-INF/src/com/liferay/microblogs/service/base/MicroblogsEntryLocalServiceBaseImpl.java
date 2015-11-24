@@ -22,7 +22,6 @@ import com.liferay.microblogs.service.persistence.MicroblogsEntryFinder;
 import com.liferay.microblogs.service.persistence.MicroblogsEntryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
-import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -31,9 +30,11 @@ import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -65,7 +66,7 @@ import javax.sql.DataSource;
 @ProviderType
 public abstract class MicroblogsEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements MicroblogsEntryLocalService,
-		IdentifiableBean {
+		IdentifiableOSGiService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -231,19 +232,33 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MicroblogsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MicroblogsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("microblogsEntryId");
 
 		return actionableDynamicQuery;
 	}
 
+	@Override
+	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil.getService());
+		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
+		indexableActionableDynamicQuery.setModelClass(MicroblogsEntry.class);
+
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"microblogsEntryId");
+
+		return indexableActionableDynamicQuery;
+	}
+
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
 		actionableDynamicQuery.setBaseLocalService(com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(MicroblogsEntry.class);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
+		actionableDynamicQuery.setModelClass(MicroblogsEntry.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("microblogsEntryId");
 	}
@@ -544,23 +559,13 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the Spring bean ID for this bean.
+	 * Returns the OSGi service identifier.
 	 *
-	 * @return the Spring bean ID for this bean
+	 * @return the OSGi service identifier
 	 */
 	@Override
-	public String getBeanIdentifier() {
-		return _beanIdentifier;
-	}
-
-	/**
-	 * Sets the Spring bean ID for this bean.
-	 *
-	 * @param beanIdentifier the Spring bean ID for this bean
-	 */
-	@Override
-	public void setBeanIdentifier(String beanIdentifier) {
-		_beanIdentifier = beanIdentifier;
+	public String getOSGiServiceIdentifier() {
+		return MicroblogsEntryLocalService.class.getName();
 	}
 
 	@Override
@@ -616,7 +621,7 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = MicroblogsEntryLocalService.class)
+	@BeanReference(type = com.liferay.microblogs.service.MicroblogsEntryLocalService.class)
 	protected MicroblogsEntryLocalService microblogsEntryLocalService;
 	@BeanReference(type = com.liferay.microblogs.service.MicroblogsEntryService.class)
 	protected com.liferay.microblogs.service.MicroblogsEntryService microblogsEntryService;
@@ -640,7 +645,6 @@ public abstract class MicroblogsEntryLocalServiceBaseImpl
 	protected com.liferay.portal.service.UserService userService;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	private String _beanIdentifier;
 	private ClassLoader _classLoader;
 	private MicroblogsEntryLocalServiceClpInvoker _clpInvoker = new MicroblogsEntryLocalServiceClpInvoker();
 }

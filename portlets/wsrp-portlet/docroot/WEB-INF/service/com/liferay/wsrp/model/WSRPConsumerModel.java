@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.ShardedModel;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -42,7 +43,8 @@ import java.util.Date;
  * @generated
  */
 @ProviderType
-public interface WSRPConsumerModel extends BaseModel<WSRPConsumer>, StagedModel {
+public interface WSRPConsumerModel extends BaseModel<WSRPConsumer>, ShardedModel,
+	StagedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -262,6 +264,20 @@ public interface WSRPConsumerModel extends BaseModel<WSRPConsumer>, StagedModel 
 	 * @param markupCharacterSets the markup character sets of this w s r p consumer
 	 */
 	public void setMarkupCharacterSets(String markupCharacterSets);
+
+	/**
+	 * Returns the last publish date of this w s r p consumer.
+	 *
+	 * @return the last publish date of this w s r p consumer
+	 */
+	public Date getLastPublishDate();
+
+	/**
+	 * Sets the last publish date of this w s r p consumer.
+	 *
+	 * @param lastPublishDate the last publish date of this w s r p consumer
+	 */
+	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override
 	public boolean isNew();
