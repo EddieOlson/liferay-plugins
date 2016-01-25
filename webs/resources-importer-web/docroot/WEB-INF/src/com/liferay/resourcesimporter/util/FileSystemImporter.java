@@ -15,11 +15,19 @@
 package com.liferay.resourcesimporter.util;
 
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.DDMStructureConstants;
+import com.liferay.dynamic.data.mapping.model.DDMTemplate;
+import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil;
+import com.liferay.dynamic.data.mapping.storage.StorageType;
 import com.liferay.journal.configuration.JournalServiceConfigurationValues;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.JournalArticleServiceUtil;
+import com.liferay.journal.util.JournalConverterUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -28,9 +36,9 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -39,8 +47,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -84,13 +90,6 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
-import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
-import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalConverterUtil;
 import com.liferay.wiki.model.WikiPage;
 
 import java.io.BufferedInputStream;
@@ -340,8 +339,7 @@ public class FileSystemImporter extends BaseImporter {
 					DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
 					PortalUtil.getClassNameId(DDLRecordSet.class),
 					getKey(fileName), getMap(name), null,
-					StringUtil.read(inputStream),
-					PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_STORAGE_TYPE),
+					StringUtil.read(inputStream), StorageType.JSON.toString(),
 					DDMStructureConstants.TYPE_DEFAULT, serviceContext);
 			}
 			else {
@@ -577,10 +575,11 @@ public class FileSystemImporter extends BaseImporter {
 			String ddmStructureKey, String fileName, InputStream inputStream)
 		throws Exception {
 
+		String language = getDDMTemplateLanguage(fileName);
+
 		fileName = FileUtil.stripExtension(fileName);
 
 		String name = getName(fileName);
-		String language = getDDMTemplateLanguage(fileName);
 
 		String xsl = StringUtil.read(inputStream);
 
@@ -1259,16 +1258,16 @@ public class FileSystemImporter extends BaseImporter {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(groupId);
 
-		boolean indexReadOnly = SearchEngineUtil.isIndexReadOnly();
+		boolean indexReadOnly = IndexWriterHelperUtil.isIndexReadOnly();
 
 		try {
-			SearchEngineUtil.setIndexReadOnly(true);
+			IndexWriterHelperUtil.setIndexReadOnly(true);
 
 			setUpAssets("assets.json");
 			setUpSettings("settings.json");
 			setUpSitemap("sitemap.json");
 
-			SearchEngineUtil.setIndexReadOnly(false);
+			IndexWriterHelperUtil.setIndexReadOnly(false);
 
 			long startTime = System.currentTimeMillis();
 
@@ -1285,7 +1284,7 @@ public class FileSystemImporter extends BaseImporter {
 			}
 		}
 		finally {
-			SearchEngineUtil.setIndexReadOnly(indexReadOnly);
+			IndexWriterHelperUtil.setIndexReadOnly(indexReadOnly);
 		}
 	}
 
@@ -1669,11 +1668,13 @@ public class FileSystemImporter extends BaseImporter {
 	}
 
 	protected void setUpSitemap(String fileName) throws Exception {
-		LayoutLocalServiceUtil.deleteLayouts(
-			groupId, true, new ServiceContext());
+		if (!updateModeEnabled) {
+			LayoutLocalServiceUtil.deleteLayouts(
+				groupId, true, new ServiceContext());
 
-		LayoutLocalServiceUtil.deleteLayouts(
-			groupId, false, new ServiceContext());
+			LayoutLocalServiceUtil.deleteLayouts(
+				groupId, false, new ServiceContext());
+		}
 
 		JSONObject jsonObject = getJSONObject(fileName);
 

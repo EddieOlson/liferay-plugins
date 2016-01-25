@@ -14,13 +14,12 @@
 
 package com.liferay.knowledgebase.service.impl;
 
-import com.liferay.knowledgebase.DuplicateKBArticleUrlTitleException;
-import com.liferay.knowledgebase.InvalidKBArticleUrlTitleException;
 import com.liferay.knowledgebase.KBArticleContentException;
 import com.liferay.knowledgebase.KBArticleParentException;
 import com.liferay.knowledgebase.KBArticlePriorityException;
 import com.liferay.knowledgebase.KBArticleSourceURLException;
 import com.liferay.knowledgebase.KBArticleTitleException;
+import com.liferay.knowledgebase.KBArticleUrlTitleException;
 import com.liferay.knowledgebase.NoSuchArticleException;
 import com.liferay.knowledgebase.admin.importer.KBArticleImporter;
 import com.liferay.knowledgebase.admin.social.AdminActivityKeys;
@@ -31,6 +30,7 @@ import com.liferay.knowledgebase.model.KBArticleConstants;
 import com.liferay.knowledgebase.model.KBFolder;
 import com.liferay.knowledgebase.model.KBFolderConstants;
 import com.liferay.knowledgebase.service.KBArticleLocalServiceUtil;
+import com.liferay.knowledgebase.service.KBArticleServiceUtil;
 import com.liferay.knowledgebase.service.base.KBArticleLocalServiceBaseImpl;
 import com.liferay.knowledgebase.util.KnowledgeBaseConstants;
 import com.liferay.knowledgebase.util.KnowledgeBaseUtil;
@@ -55,9 +55,9 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntryThreadLocal;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -72,6 +72,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SystemEventConstants;
@@ -123,6 +124,8 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		long kbFolderId = KnowledgeBaseUtil.getKBFolderId(
 			parentResourceClassNameId, parentResourcePrimKey);
+
+		urlTitle = StringUtil.toLowerCase(urlTitle);
 
 		validateUrlTitle(groupId, kbFolderId, urlTitle);
 
@@ -339,7 +342,8 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(KBArticle.class);
+		Indexer<KBArticle> indexer = IndexerRegistryUtil.getIndexer(
+			KBArticle.class);
 
 		indexer.delete(kbArticle);
 
@@ -576,10 +580,11 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by
-	 *             {@link #getKBArticleAndAllDescendantKBArticles(long, int,
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #getKBArticleAndAllDescendantKBArticles(long, int,
 	 *             com.liferay.portal.kernel.util.OrderByComparator)}
 	 */
+	@Deprecated
 	@Override
 	public List<KBArticle> getKBArticleAndAllDescendants(
 		long resourcePrimKey, int status,
@@ -842,6 +847,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 	 *             int, int, int,
 	 *             com.liferay.portal.kernel.util.OrderByComparator)}
 	 */
+	@Deprecated
 	@Override
 	public List<KBArticle> getSiblingKBArticles(
 		long groupId, long parentResourcePrimKey, int status, int start,
@@ -856,6 +862,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 	 * @deprecated As of 7.0.0, replaced by {@link #getKBArticlesCount(long,
 	 *             long, int)}
 	 */
+	@Deprecated
 	@Override
 	public int getSiblingKBArticlesCount(
 		long groupId, long parentResourcePrimKey, int status) {
@@ -951,6 +958,22 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 				resourcePrimKey, AdminActivityKeys.MOVE_KB_ARTICLE,
 				extraDataJSONObject.toString(), 0);
 		}
+	}
+
+	@Override
+	public KBArticle revertKBArticle(
+			long userId, long resourcePrimKey, int version,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		KBArticle kbArticle = KBArticleServiceUtil.getKBArticle(
+			resourcePrimKey, version);
+
+		return updateKBArticle(
+			userId, resourcePrimKey, kbArticle.getTitle(),
+			kbArticle.getContent(), kbArticle.getDescription(),
+			kbArticle.getSourceURL(), StringUtil.split(kbArticle.getSections()),
+			null, null, serviceContext);
 	}
 
 	@Override
@@ -1266,7 +1289,8 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(KBArticle.class);
+		Indexer<KBArticle> indexer = IndexerRegistryUtil.getIndexer(
+			KBArticle.class);
 
 		indexer.reindex(kbArticle);
 
@@ -1675,7 +1699,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 				groupId, kbFolderId, uniqueUrlTitle, _STATUSES);
 
 			for (int i = 1; kbArticlesCount > 0; i++) {
-				uniqueUrlTitle = urlTitle + StringPool.DASH + i;
+				uniqueUrlTitle = getUniqueUrlTitle(urlTitle, i);
 
 				kbArticlesCount = kbArticlePersistence.countByG_KBFI_UT_ST(
 					groupId, kbFolderId, uniqueUrlTitle, _STATUSES);
@@ -1690,7 +1714,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 			groupId, kbFolder.getUrlTitle(), uniqueUrlTitle, _STATUSES);
 
 		for (int i = 1; kbArticlesCount > 0; i++) {
-			uniqueUrlTitle = urlTitle + StringPool.DASH + i;
+			uniqueUrlTitle = getUniqueUrlTitle(urlTitle, i);
 
 			kbArticlesCount = kbArticleFinder.countByUrlTitle(
 				groupId, kbFolder.getUrlTitle(), uniqueUrlTitle, _STATUSES);
@@ -1709,6 +1733,16 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		}
 
 		return urlTitle.substring(1);
+	}
+
+	protected String getUniqueUrlTitle(String urlTitle, int suffix) {
+		String uniqueUrlTitle = urlTitle + StringPool.DASH + suffix;
+
+		int maxLength = ModelHintsUtil.getMaxLength(
+			KBArticle.class.getName(), "urlTitle");
+
+		return StringUtil.shorten(
+			uniqueUrlTitle, maxLength, StringPool.DASH + suffix);
 	}
 
 	protected boolean isValidFileName(String name) {
@@ -1881,7 +1915,7 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 
 		// Sync indexed permission fields
 
-		SearchEngineUtil.updatePermissionFields(
+		IndexWriterHelperUtil.updatePermissionFields(
 			KBArticle.class.getName(), String.valueOf(resourcePrimKey));
 	}
 
@@ -1944,17 +1978,23 @@ public class KBArticleLocalServiceImpl extends KBArticleLocalServiceBaseImpl {
 		}
 
 		if (!KnowledgeBaseUtil.isValidUrlTitle(urlTitle)) {
-			throw new InvalidKBArticleUrlTitleException(
-				"URL title must start with a '/' and contain only " +
-					"alphanumeric characters, dashes, and underscores");
+			throw new KBArticleUrlTitleException.
+				MustNotContainInvalidCharacters(urlTitle);
+		}
+
+		int urlTitleMaxSize = ModelHintsUtil.getMaxLength(
+			KBArticle.class.getName(), "urlTitle");
+
+		if (urlTitle.length() > urlTitleMaxSize) {
+			throw new KBArticleUrlTitleException.MustNotExceedMaximumSize(
+				urlTitle, urlTitleMaxSize);
 		}
 
 		Collection<KBArticle> kbArticles = kbArticlePersistence.findByG_KBFI_UT(
 			groupId, kbFolderId, urlTitle.substring(1));
 
 		if (!kbArticles.isEmpty()) {
-			throw new DuplicateKBArticleUrlTitleException(
-				"Duplicate URL title " + urlTitle);
+			throw new KBArticleUrlTitleException.MustNotBeDuplicate(urlTitle);
 		}
 	}
 

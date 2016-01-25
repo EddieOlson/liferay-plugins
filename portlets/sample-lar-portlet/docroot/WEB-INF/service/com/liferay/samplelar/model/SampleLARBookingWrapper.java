@@ -64,6 +64,7 @@ public class SampleLARBookingWrapper implements SampleLARBooking,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("bookingNumber", getBookingNumber());
+		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -123,6 +124,12 @@ public class SampleLARBookingWrapper implements SampleLARBooking,
 		if (bookingNumber != null) {
 			setBookingNumber(bookingNumber);
 		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
 	}
 
 	@Override
@@ -179,6 +186,16 @@ public class SampleLARBookingWrapper implements SampleLARBooking,
 	@Override
 	public long getGroupId() {
 		return _sampleLARBooking.getGroupId();
+	}
+
+	/**
+	* Returns the last publish date of this sample l a r booking.
+	*
+	* @return the last publish date of this sample l a r booking
+	*/
+	@Override
+	public Date getLastPublishDate() {
+		return _sampleLARBooking.getLastPublishDate();
 	}
 
 	/**
@@ -345,6 +362,16 @@ public class SampleLARBookingWrapper implements SampleLARBooking,
 	}
 
 	/**
+	* Sets the last publish date of this sample l a r booking.
+	*
+	* @param lastPublishDate the last publish date of this sample l a r booking
+	*/
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_sampleLARBooking.setLastPublishDate(lastPublishDate);
+	}
+
+	/**
 	* Sets the modified date of this sample l a r booking.
 	*
 	* @param modifiedDate the modified date of this sample l a r booking
@@ -472,14 +499,6 @@ public class SampleLARBookingWrapper implements SampleLARBooking,
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _sampleLARBooking.getStagedModelType();
-	}
-
-	/**
-	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
-	 */
-	@Deprecated
-	public SampleLARBooking getWrappedSampleLARBooking() {
-		return _sampleLARBooking;
 	}
 
 	@Override

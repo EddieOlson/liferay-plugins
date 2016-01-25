@@ -66,6 +66,7 @@ public class KBFolderWrapper implements KBFolder, ModelWrapper<KBFolder> {
 		attributes.put("name", getName());
 		attributes.put("urlTitle", getUrlTitle());
 		attributes.put("description", getDescription());
+		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -143,6 +144,12 @@ public class KBFolderWrapper implements KBFolder, ModelWrapper<KBFolder> {
 		if (description != null) {
 			setDescription(description);
 		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
 	}
 
 	@Override
@@ -213,6 +220,16 @@ public class KBFolderWrapper implements KBFolder, ModelWrapper<KBFolder> {
 	@Override
 	public long getKbFolderId() {
 		return _kbFolder.getKbFolderId();
+	}
+
+	/**
+	* Returns the last publish date of this k b folder.
+	*
+	* @return the last publish date of this k b folder
+	*/
+	@Override
+	public Date getLastPublishDate() {
+		return _kbFolder.getLastPublishDate();
 	}
 
 	/**
@@ -421,6 +438,16 @@ public class KBFolderWrapper implements KBFolder, ModelWrapper<KBFolder> {
 	}
 
 	/**
+	* Sets the last publish date of this k b folder.
+	*
+	* @param lastPublishDate the last publish date of this k b folder
+	*/
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_kbFolder.setLastPublishDate(lastPublishDate);
+	}
+
+	/**
 	* Sets the modified date of this k b folder.
 	*
 	* @param modifiedDate the modified date of this k b folder
@@ -567,14 +594,6 @@ public class KBFolderWrapper implements KBFolder, ModelWrapper<KBFolder> {
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _kbFolder.getStagedModelType();
-	}
-
-	/**
-	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
-	 */
-	@Deprecated
-	public KBFolder getWrappedKBFolder() {
-		return _kbFolder;
 	}
 
 	@Override

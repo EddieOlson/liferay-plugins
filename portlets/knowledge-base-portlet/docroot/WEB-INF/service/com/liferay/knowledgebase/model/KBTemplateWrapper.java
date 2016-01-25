@@ -64,6 +64,7 @@ public class KBTemplateWrapper implements KBTemplate, ModelWrapper<KBTemplate> {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
 		attributes.put("content", getContent());
+		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -128,6 +129,12 @@ public class KBTemplateWrapper implements KBTemplate, ModelWrapper<KBTemplate> {
 
 		if (content != null) {
 			setContent(content);
+		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
 		}
 	}
 
@@ -194,6 +201,16 @@ public class KBTemplateWrapper implements KBTemplate, ModelWrapper<KBTemplate> {
 	@Override
 	public long getKbTemplateId() {
 		return _kbTemplate.getKbTemplateId();
+	}
+
+	/**
+	* Returns the last publish date of this k b template.
+	*
+	* @return the last publish date of this k b template
+	*/
+	@Override
+	public Date getLastPublishDate() {
+		return _kbTemplate.getLastPublishDate();
 	}
 
 	/**
@@ -370,6 +387,16 @@ public class KBTemplateWrapper implements KBTemplate, ModelWrapper<KBTemplate> {
 	}
 
 	/**
+	* Sets the last publish date of this k b template.
+	*
+	* @param lastPublishDate the last publish date of this k b template
+	*/
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_kbTemplate.setLastPublishDate(lastPublishDate);
+	}
+
+	/**
 	* Sets the modified date of this k b template.
 	*
 	* @param modifiedDate the modified date of this k b template
@@ -496,14 +523,6 @@ public class KBTemplateWrapper implements KBTemplate, ModelWrapper<KBTemplate> {
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _kbTemplate.getStagedModelType();
-	}
-
-	/**
-	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
-	 */
-	@Deprecated
-	public KBTemplate getWrappedKBTemplate() {
-		return _kbTemplate;
 	}
 
 	@Override

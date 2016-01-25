@@ -63,6 +63,7 @@ public class WSRPConsumerPortletWrapper implements WSRPConsumerPortlet,
 		attributes.put("wsrpConsumerId", getWsrpConsumerId());
 		attributes.put("name", getName());
 		attributes.put("portletHandle", getPortletHandle());
+		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -117,6 +118,12 @@ public class WSRPConsumerPortletWrapper implements WSRPConsumerPortlet,
 		if (portletHandle != null) {
 			setPortletHandle(portletHandle);
 		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
 	}
 
 	@Override
@@ -153,6 +160,16 @@ public class WSRPConsumerPortletWrapper implements WSRPConsumerPortlet,
 	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _wsrpConsumerPortlet.getExpandoBridge();
+	}
+
+	/**
+	* Returns the last publish date of this w s r p consumer portlet.
+	*
+	* @return the last publish date of this w s r p consumer portlet
+	*/
+	@Override
+	public Date getLastPublishDate() {
+		return _wsrpConsumerPortlet.getLastPublishDate();
 	}
 
 	/**
@@ -299,6 +316,16 @@ public class WSRPConsumerPortletWrapper implements WSRPConsumerPortlet,
 	}
 
 	/**
+	* Sets the last publish date of this w s r p consumer portlet.
+	*
+	* @param lastPublishDate the last publish date of this w s r p consumer portlet
+	*/
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_wsrpConsumerPortlet.setLastPublishDate(lastPublishDate);
+	}
+
+	/**
 	* Sets the modified date of this w s r p consumer portlet.
 	*
 	* @param modifiedDate the modified date of this w s r p consumer portlet
@@ -426,14 +453,6 @@ public class WSRPConsumerPortletWrapper implements WSRPConsumerPortlet,
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _wsrpConsumerPortlet.getStagedModelType();
-	}
-
-	/**
-	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
-	 */
-	@Deprecated
-	public WSRPConsumerPortlet getWrappedWSRPConsumerPortlet() {
-		return _wsrpConsumerPortlet;
 	}
 
 	@Override
