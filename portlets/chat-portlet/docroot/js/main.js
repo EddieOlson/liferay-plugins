@@ -544,8 +544,6 @@ AUI().use(
 						heightMonitor.setStyle('width', instance._chatInputWidth);
 					}
 
-					var chatInputEl = chatInput.getDOM();
-
 					var content = LString.escapeHTML(chatInput.val());
 					var textNode = DOC.createTextNode(content);
 
@@ -786,12 +784,31 @@ AUI().use(
 
 				AUI.Env.add(window, 'storage', storageFn);
 
-				A.getWin().on(
-					'beforeunload',
-					function(event) {
-						AUI.Env.remove(window, 'storage', storageFn);
+				var clearStorage = function() {
+					AUI.Env.remove(window, 'storage', storageFn);
 
-						localStorage.setItem('liferay.chat.messages', null);
+					localStorage.setItem('liferay.chat.messages', null);
+				};
+
+				var beforeUnload = A.getWin().on('beforeunload', clearStorage);
+
+				Liferay.on(
+					'screenLoad',
+					function() {
+						beforeUnload.detach();
+
+						clearStorage();
+
+						Liferay.Poller.removeListener(instance._portletId);
+					}
+				);
+
+				Liferay.Chat.Manager.registerBuddyService(
+					{
+						iconHTML: function(userDetails) {
+							return Lang.sub('<a href="{displayURL}">' + Liferay.Util.getLexiconIconTpl('user') + '</a>', userDetails);
+						},
+						name: 'chat-user-dashboard-service'
 					}
 				);
 			},
@@ -851,26 +868,27 @@ AUI().use(
 			registerBuddyService: function(options) {
 				var instance = this;
 
-				var fn = options.fn;
 				var icon = options.icon;
 				var name = options.name;
 
-				instance._buddyServices[name] = fn;
+				instance._buddyServices[name] = options;
 
-				var styleSheet = instance._styleSheet;
+				if (icon) {
+					var styleSheet = instance._styleSheet;
 
-				if (!styleSheet) {
-					styleSheet = new A.StyleSheet();
+					if (!styleSheet) {
+						styleSheet = new A.StyleSheet();
 
-					instance._styleSheet = styleSheet;
-				}
-
-				styleSheet.set(
-					'.chat-bar .buddy-services .' + name,
-					{
-						backgroundImage: 'url("' + icon + '")'
+						instance._styleSheet = styleSheet;
 					}
-				);
+
+					styleSheet.set(
+						'.chat-bar .buddy-services .' + name,
+						{
+							backgroundImage: 'url("' + icon + '")'
+						}
+					);
+				}
 			},
 
 			send: function(options, id) {
@@ -989,13 +1007,17 @@ AUI().use(
 							var target = event.currentTarget;
 
 							if (target.ancestor('.buddy-services')) {
-								event.stopPropagation();
-
 								var serviceName = target.getAttribute('class');
 
-								instance._buddyServices[serviceName](target.ancestor('li.user'));
+								var buddyService = instance._buddyServices[serviceName];
+
+								if (buddyService && buddyService.fn) {
+									buddyService.fn(target.ancestor('li.user'), event);
+								}
+
+								event._liferayChatBuddyService = true;
 							}
-							else {
+							else if (!event._liferayChatBuddyService) {
 								instance._createChatFromUser(target);
 							}
 						},
@@ -1447,7 +1469,7 @@ AUI().use(
 					var userImagePath = Liferay.Chat.Util.getUserImagePath(buddy.portraitURL);
 
 					buffer.push(
-						'<li class="active user" data-groupId="' + buddy.groupId + '" data-userId="' + buddy.userId + '">' +
+						'<li class="active user" data-displayURL="' + buddy.displayURL + '" data-groupId="' + buddy.groupId + '" data-userId="' + buddy.userId + '">' +
 							'<img alt="' + fullName + '" src="' + userImagePath + '" />' +
 							'<div class="name">' + fullName + '</div>' +
 							'<div class="buddy-services">'
@@ -1456,7 +1478,13 @@ AUI().use(
 					var serviceNames = instance._buddyServices;
 
 					for (var serviceName in serviceNames) {
-						buffer.push('<div class="' + serviceName + '"></div>');
+						var iconHTML = serviceNames[serviceName].iconHTML || '';
+
+						if (Lang.isFunction(iconHTML)) {
+							iconHTML = iconHTML(buddy);
+						}
+
+						buffer.push('<div class="' + serviceName + '">' + iconHTML + '</div>');
 					}
 
 					buffer.push(
@@ -1667,16 +1695,10 @@ AUI().use(
 		Liferay.publish(
 			'chatPortletReady',
 			{
-				defaultFn: A.bind('init', Liferay.Chat.Manager),
-				fireOnce: true
+				defaultFn: A.bind('init', Liferay.Chat.Manager)
 			}
 		);
 
-		A.on(
-			'domready',
-			function() {
-				Liferay.fire('chatPortletReady');
-			}
-		);
+		Liferay.fire('chatPortletReady');
 	}
 );

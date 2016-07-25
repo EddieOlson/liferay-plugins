@@ -29,9 +29,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.asset.kernel.model.AssetTag" %><%@
-page import="com.liferay.asset.kernel.model.AssetTagStats" %><%@
+page import="com.liferay.asset.kernel.service.AssetTagServiceUtil" %><%@
 page import="com.liferay.asset.kernel.service.AssetTagLocalServiceUtil" %><%@
-page import="com.liferay.asset.kernel.service.AssetTagStatsLocalServiceUtil" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
@@ -77,9 +76,9 @@ page import="java.util.List" %>
 page import="javax.portlet.PortletURL" %><%@
 page import="javax.portlet.WindowState" %>
 
-<portlet:defineObjects />
-
 <liferay-theme:defineObjects />
+
+<portlet:defineObjects />
 
 <%
 String currentURL = PortalUtil.getCurrentURL(request);
